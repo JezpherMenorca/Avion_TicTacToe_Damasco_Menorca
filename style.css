@@ -1,0 +1,61 @@
+* {
+  font-family: 'Silkscreen', cursive;
+  background-color: black;
+}
+
+body, button {
+  color: #7f7;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+  }
+  
+  .container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .board {
+    display: inline-block;
+    border: 2px solid #7f7;
+  }
+  
+  .row {
+    display: flex;
+    border: 2px solid #7f7;
+  }
+  
+  .cell {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    cursor: pointer;
+    border: 2px solid #7f7;
+  }
+  
+  .message-container {
+    margin-top: 20px;
+  }
+  
+  .reset-btn {
+    margin-top: 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
