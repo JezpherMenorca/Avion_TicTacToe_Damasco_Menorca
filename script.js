@@ -4,7 +4,6 @@ const board = [
     ['', '', ''],
   ];
   
-let currentPlayer = 'X';
 let moveHistory = [];
 let currentMoveIndex = -1;
 
@@ -15,6 +14,9 @@ const resetBtn = document.querySelector('.reset-btn');
 const previousBtn = document.querySelector('.previous-btn');
 const nextBtn = document.querySelector('.next-btn');
 const moveCounter = document.querySelector('.move-counter');
+const xFirstBtn = document.querySelector('.x-first');
+const oFirstBtn = document.querySelector('.o-first');
+const chooseFirstMessage = document.querySelector('.choose-first-message');
 
 messageContainer.style.opacity = 0;
 
@@ -108,12 +110,16 @@ const hideMoveButtons = () => {
   previousBtn.style.opacity = 0;
   nextBtn.style.opacity = 0;
   moveCounter.style.opacity = 0;
+  previousBtn.disabled = true;
+  nextBtn.disabled = true;
 };
 
 const showMoveButtons = () => {
   previousBtn.style.opacity = 1;
   nextBtn.style.opacity = 1;
   moveCounter.style.opacity = 1;
+  previousBtn.disabled = false;
+  nextBtn.disabled = false;
 };
 
 const checkGameEnd = () => {
@@ -123,49 +129,88 @@ const checkGameEnd = () => {
     hideMoveButtons();
   }
 };
-  
+
+//CHOOSE FIRST
+
+const chooseX = () => {
+  currentPlayer = 'X';
+  disableChoose();
+}
+
+const chooseO = () => {
+  currentPlayer = 'O';
+  disableChoose();
+}
+ 
+const disableChoose = () => {
+  xFirstBtn.style.opacity = 0;
+  oFirstBtn.style.opacity = 0;
+  chooseFirstMessage.style.opacity = 0;
+  xFirstBtn.disabled = true;
+  oFirstBtn.disabled = true;
+}
+
+const enableChoose = () => {
+  xFirstBtn.style.opacity = 1;
+  oFirstBtn.style.opacity = 1;
+  chooseFirstMessage.style.opacity = 1;
+  xFirstBtn.disabled = false;
+  oFirstBtn.disabled = false;
+  currentPlayer = '';
+}
+
 const handleReset = () => {
-    cells.forEach(cell => cell.textContent = '');
-    board.forEach(row => row.fill(''));
-    currentPlayer = 'X';
-    hideMessage();
-    moveHistory = [];
-    currentMoveIndex = -1;
-    hideMoveButtons();
-  };
+  cells.forEach(cell => cell.textContent = '');
+  board.forEach(row => row.fill(''));
+  enableChoose();
+  hideMessage();
+  moveHistory = [];
+  currentMoveIndex = -1;
+  hideMoveButtons();
+};
 
 const handleClick = (event) => {
-    const cell = event.target;
-    const rowIndex = parseInt(cell.getAttribute('data-row'));
-    const colIndex = parseInt(cell.getAttribute('data-col'));
+  const cell = event.target;
+  const rowIndex = parseInt(cell.getAttribute('data-row'));
+  const colIndex = parseInt(cell.getAttribute('data-col'));
   
-    if (cell.textContent === '' && !checkForWin() && !checkForDraw()) {
-      cell.textContent = currentPlayer;
-      board[rowIndex][colIndex] = currentPlayer;
-  
-      if (checkForWin()) {
-        displayMessage(`Player ${currentPlayer} wins!`);
-      } else if (checkForDraw()) {
-        displayMessage("It's a draw!");
-      } else {
-        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-      }
+  if (cell.textContent === '' && !checkForWin() && !checkForDraw()) {
+    cell.textContent = currentPlayer;
+    board[rowIndex][colIndex] = currentPlayer;
+    
+    if (checkForWin()) {
+      displayMessage(`Player ${currentPlayer} wins!`);
+    } else if (checkForDraw()) {
+      displayMessage("It's a draw!");
+    } else if (currentPlayer === '') {
+      currentPlayer === '';
+      alert("Choose who goes first!")
+    } else if (currentPlayer === 'X') {
+      currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+    } else if (currentPlayer === 'O') {
+      currentPlayer = currentPlayer === 'O' ? 'X': 'O';
     }
-    addMoveToHistory(rowIndex, colIndex);
-    checkGameEnd();
-  };
-  
+    //} else {
+    //  currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+    //}
+  }
+  addMoveToHistory(rowIndex, colIndex);
+  checkGameEnd();
+};
+
 cells.forEach((cell, index) => {
-    const rowIndex = Math.floor(index / 3);
-    const colIndex = index % 3;
+  const rowIndex = Math.floor(index / 3);
+  const colIndex = index % 3;
     cell.setAttribute('data-row', rowIndex);
     cell.setAttribute('data-col', colIndex);
     cell.addEventListener('click', handleClick);
   });
   
-resetBtn.addEventListener('click', handleReset);
-previousBtn.addEventListener('click', previousMove);
-nextBtn.addEventListener('click', nextMove);
-hideMoveButtons();
-
+  resetBtn.addEventListener('click', handleReset);
+  previousBtn.addEventListener('click', previousMove);
+  nextBtn.addEventListener('click', nextMove);
+  xFirstBtn.addEventListener('click', chooseX);
+  oFirstBtn.addEventListener('click', chooseO);
+  hideMoveButtons();
+  
   

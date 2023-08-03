@@ -1,19 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tic Tac Toe</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
-</head>
-<body>
-  <div class="container">
-    <div id="board">
-    <h1>Tic Tac Toe</h1>
-    <div class="board">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div id="board">
+        <h1>Tic Tac Toe</h1>
+        <div id="chooseFirst">
+          <p class="choose-first-message">Choose who goes first</p>
+          <button class="x-first">X</button>
+          <button class="o-first">O</button>
+        </div>
+        <div><br></b></div>
+        <div class="board">
           <div class="row">
             <div class="cell" data-cell></div>
             <div class="cell" data-cell></div>
@@ -33,16 +42,16 @@
         <div class="message-container">
           <p class="message">_</p>
         </div>
-    </div>
-    <button class="reset-btn">Reset</button>
-  
-    <div id="historyBtns">
+      </div>
+      <button class="reset-btn">Reset</button>
+
+      <div id="historyBtns">
         <button class="previous-btn">Previous</button>
         <button class="next-btn">Next</button>
         <p class="move-counter"></p>
+      </div>
     </div>
-  </div>
 
-  <script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
