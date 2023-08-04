@@ -6,6 +6,7 @@ const board = [
   
 let moveHistory = [];
 let currentMoveIndex = -1;
+let startingPlayer = '';
 
 const cells = document.querySelectorAll('[data-cell]');
 const messageContainer = document.querySelector('.message-container');
@@ -75,7 +76,7 @@ const updateBoard = (moveIndex) => {
     for (let i = 0; i <= moveIndex; i++) {
       const move = moveHistory[i];
       const {row, column} = move;
-      const currentPlayerSymbol = i % 2 === 0 ? 'X' : 'O';
+      const currentPlayerSymbol = i % 2 === 0 ? startingPlayer : startingPlayer === 'X' ? 'O' : 'X';
 
       board[row][column] = currentPlayerSymbol;
       const cellIndex = row * 3 + column;
@@ -134,11 +135,13 @@ const checkGameEnd = () => {
 
 const chooseX = () => {
   currentPlayer = 'X';
+  startingPlayer = 'X';
   disableChoose();
 }
 
 const chooseO = () => {
   currentPlayer = 'O';
+  startingPlayer = 'O';
   disableChoose();
 }
  
@@ -212,5 +215,3 @@ cells.forEach((cell, index) => {
   xFirstBtn.addEventListener('click', chooseX);
   oFirstBtn.addEventListener('click', chooseO);
   hideMoveButtons();
-  
-  
